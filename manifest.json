@@ -1,0 +1,27 @@
+﻿{
+	"manifest_version": 2,
+	"name": "jscrawl爬虫",
+	"version": "0.0.1",
+	"background": { "scripts": ["/js/jquery.min.js","/js/socket.io-1.4.5.js","background.js"] },
+	"page_action": {
+		"default_icon": {
+			"19": "cnblogs_19.png",
+			"38": "cnblogs_38.png"
+		},
+		"default_title": "jscrawl爬虫", // shown in tooltip
+		"default_popup": "popup.html"
+	},
+	"permissions" : ["desktopCapture","alarms","tabs",
+		"http://*/",
+    	"http://*/*",
+    	"https://*/",
+    	"https://*/*",
+		"downloads",
+		"cookies",
+		"storage"],
+	"content_scripts":[{
+		"matches": ["http://*/*","https://*/*"],
+		"js":["/js/jquery.min.js", "content_script.js"],
+		"run_at": "document_end"
+	}]
+}
