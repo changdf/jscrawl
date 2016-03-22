@@ -1,4 +1,4 @@
-﻿//页面加载完毕再执行
+//页面加载完毕再执行
 $(function(){
 	var settings = {
 		maxCommentPage:50,

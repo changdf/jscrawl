@@ -1,4 +1,4 @@
-﻿//background.js仅在加载插件时执行一次
+//background.js仅在加载插件时执行一次
 var settings = {
 	crawlName:'cdf',
 	interval:0.05,
