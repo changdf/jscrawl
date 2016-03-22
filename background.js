@@ -113,40 +113,17 @@ function downloadImage(){
 //判断websocket是否连通，如果不通，保存到本地
 function checkSocket(socket,key,value){
 	if(!tmpSocket.connected){
-			chrome.storage.local.get(key,function(data){
-				if(data[key]==null){
-					chrome.storage.local.set({key:value}, function(){
-					});
-				}else{
-					var tmpArray = data[key].concat(value);
-					chrome.storage.local.set({key:tmpArray}, function(){
-					});
-				}
-			})
+		chrome.storage.local.get(key,function(data){
+			if(data[key]==null){
+				chrome.storage.local.set({key:value}, function(){
+				});
+			}else{
+				var tmpArray = data[key].concat(value);
+				chrome.storage.local.set({key:tmpArray}, function(){
+				});
+			}
+		})
 	}
 }
 
-//定时点击某个评论页面
-/*chrome.alarms.create('clickCommentPage', { periodInMinutes: settings.interval});
-function clickCommentPage(){
-	chrome.tabs.query({}, function(tabs) {
-		for(var i=0;i<tabs.length;i++){
-			if((tabs[i].url.indexOf("detail.tmall.com/item.htm")!=-1)
-			|| (tabs[i].url.indexOf("taobao.com/item")!=-1)){
-				//获取下一页的评论
-				chrome.tabs.executeScript(tabs[i],{code:"nextPage();", allFrames: true},function(postData){
-					if(postData=="exception"){
-						//将异常URL地址保存到服务器
-						socket.emit('errorUrl', {crawlName:settings.crawlName,errorUrl:tabs[i].url});
-					}else if(postData!=null && postData.length!=0){
-						//保存数据到服务器（注：此处和之前的代码基本重复，为了测试方便，暂且不提取出来）
-						socket.emit('post_detail_data',{crawlName:settings.crawlName,'post_detail_data':postData});
-					}else if(postData==null){
-						chrome.tabs.remove(tabs[i].id);
-					}
-				});
-			}
-		}
-	});
-}*/
 
