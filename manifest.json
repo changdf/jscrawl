@@ -17,9 +17,9 @@
 		"alarms",
 		"tabs",
 		"http://*/",
-    	"http://*/*",
-    	"https://*/",
-    	"https://*/*",
+	    	"http://*/*",
+	    	"https://*/",
+	    	"https://*/*",
 		"downloads",
 		"cookies",
 		"storage"
