@@ -54,18 +54,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendRequest){
 			tmpSocket.sendBuffer = [];
 		}
 		//如果网络中断则保存在storage
-		if(!tmpSocket.connected){
-			chrome.storage.local.get("post_url",function(data){
-				if(data.post_url==null){
-					chrome.storage.local.set({post_url:request.post_urlList}, function(){
-					});
-				}else{
-					var tmpArray = data.post_url.concat(request.post_urlList);
-					chrome.storage.local.set({post_url:tmpArray}, function(){
-					});
-				}
-			})
-		}
+		checkSocket(tmpSocket,"post_url",request.post_urlList);
 		//截图
 		chrome.extension.sendRequest(settings.externalId,{},function(response){
 			//关闭Tab释放资源
@@ -81,19 +70,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendRequest){
 			tmpSocket.sendBuffer = [];
 		}
 		//如果网络中断则保存在storage
-		if(!tmpSocket.connected){
-			chrome.storage.local.get("post_detail_data",function(data){
-				if(data.post_detail_data==null){
-					chrome.storage.local.set({post_detail_data:request.post_detail_data}, function(){
-					});
-				}else{
-					var tmpArray = data.post_detail_data.concat(request.post_detail_data);
-					chrome.storage.local.set({post_detail_data:tmpArray}, function(){
-						
-					});
-				}
-			})
-		}
+		checkSocket(tmpSocket,"post_detail_data",request.post_detail_data);
 	}else if(request.messageType=='errorUrl'){
 		socket.emit('errorUrl', request);
 	}else if(request.messageType=='closeTab'){
@@ -131,6 +108,22 @@ function downloadImage(){
 			}
 		}
 	});
+}
+
+//判断websocket是否连通，如果不通，保存到本地
+function checkSocket(socket,key,value){
+	if(!tmpSocket.connected){
+			chrome.storage.local.get(key,function(data){
+				if(data[key]==null){
+					chrome.storage.local.set({key:value}, function(){
+					});
+				}else{
+					var tmpArray = data[key].concat(value);
+					chrome.storage.local.set({key:tmpArray}, function(){
+					});
+				}
+			})
+	}
 }
 
 //定时点击某个评论页面
