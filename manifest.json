@@ -8,17 +8,22 @@
 			"19": "cnblogs_19.png",
 			"38": "cnblogs_38.png"
 		},
-		"default_title": "jscrawl爬虫", // shown in tooltip
+		"default_title": "jscrawl爬虫",
 		"default_popup": "popup.html"
 	},
-	"permissions" : ["desktopCapture","alarms","tabs",
+	"permissions" : 
+	[
+		"desktopCapture",
+		"alarms",
+		"tabs",
 		"http://*/",
     	"http://*/*",
     	"https://*/",
     	"https://*/*",
 		"downloads",
 		"cookies",
-		"storage"],
+		"storage"
+	],
 	"content_scripts":[{
 		"matches": ["http://*/*","https://*/*"],
 		"js":["/js/jquery.min.js", "content_script.js"],
