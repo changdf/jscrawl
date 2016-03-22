@@ -19,7 +19,6 @@ $(function(){
 			}
 		}
 	}
-
 	//获取当前要抓取的网址
 	var crawlUrl = window.location.href;
 	var isCrawlDomain = false;
@@ -29,7 +28,6 @@ $(function(){
 			break;
 		}
 	}
-
 	if(!isCrawlDomain){
 		return;
 	}
@@ -41,11 +39,9 @@ $(function(){
 	}
 	//检查当前链接是否正常抓取，如果没有，则保存到服务器
 	var isException = false;
-
 	//根据url地址解析内容或根据模式匹配解析内容
-	if((crawlUrl.indexOf("s.taobao.com/search")!=-1 && crawlUrl.indexOf("search_type")!=-1)
-		|| (crawlUrl.indexOf("s.taobao.com/list")!=-1 && crawlUrl.indexOf("app=vproduct")!=-1)
-	){
+	if((crawlUrl.indexOf("s.taobao.com/search")!=-1 && crawlUrl.indexOf("search_type")!=-1) ||
+	   (crawlUrl.indexOf("s.taobao.com/list")!=-1 && crawlUrl.indexOf("app=vproduct")!=-1)){
 		//滚动到页面底部，保证所有Ajax内容全部加载出来
 		var f1 = function(){
 			var count = 0;
@@ -106,9 +102,8 @@ $(function(){
 				f1();
 			}
 		}, false);
-	}else if((crawlUrl.indexOf("s.taobao.com/search")!=-1 && crawlUrl.indexOf("spu_title")!=-1)
-	||(crawlUrl.indexOf("s.taobao.com/list")!=-1 && crawlUrl.indexOf("app=detailproduct")!=-1)
-	){
+	}else if((crawlUrl.indexOf("s.taobao.com/search")!=-1 && crawlUrl.indexOf("spu_title")!=-1) ||
+			 (crawlUrl.indexOf("s.taobao.com/list")!=-1 && crawlUrl.indexOf("app=detailproduct")!=-1)){
 		//滚动到页面底部，保证所有Ajax内容全部加载出来
 		var f1 = function(){
 			var count = 0;
@@ -169,9 +164,8 @@ $(function(){
 				f1();
 			}
 		}, false);
-	}else if((crawlUrl.indexOf("detail.tmall.com/item.htm")!=-1)
-			|| (crawlUrl.indexOf("taobao.com/item")!=-1)
-	){
+	}else if((crawlUrl.indexOf("detail.tmall.com/item.htm")!=-1) ||
+			 (crawlUrl.indexOf("taobao.com/item")!=-1)){
 		//详情页（包含评论）
 		//获取不到可能是网页没有加载出来，sleep一下
 		if(document.querySelector("#J_Title > h3")==null){
@@ -255,10 +249,6 @@ $(function(){
 function getImageSrc(){
 	return document.getElementById("imgFixForLong").src;
 }
-
-
-
-
 
 
 
